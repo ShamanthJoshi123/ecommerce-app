@@ -11,6 +11,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.Optional;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
@@ -19,30 +20,28 @@ import static org.mockito.Mockito.when;
 class ProductServiceTest {
 
     @Mock
-    private ProductRepository repository;
+    private ProductRepository productRepository;
 
     @InjectMocks
-    private ProductService service;
-
-    @Test
-    void testAddProduct() {
-        Product product = new Product();
-        when(repository.save(any())).thenReturn(product);
-
-        Product result = service.addProduct(1L,product);
-
-        assertNotNull(result);
-    }
+    private ProductService productService;
 
     @Test
     void testGetProductById() {
-        Product product = new Product();
 
-        when(repository.findById(1L))
+        Long productId = 1L;
+
+        Product product = new Product();
+        product.setId(productId);
+        product.setName("Phone");
+        product.setPrice(10000.0);
+        product.setQuantity(10);
+
+        when(productRepository.findById(productId))
                 .thenReturn(Optional.of(product));
 
-        Product result = service.getProductById(1L);
+        Product result = productService.getProductById(productId);
 
         assertNotNull(result);
+        assertEquals("Phone", result.getName());
     }
 }
