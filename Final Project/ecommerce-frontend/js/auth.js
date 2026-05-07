@@ -23,23 +23,34 @@ async function login(event) {
         password: document.getElementById("password").value
     };
 
-    const response = await fetch("http://localhost:8080/users/login", {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json"
-        },
-        body: JSON.stringify(data)
-    });
+    try {
+        const response = await fetch("http://localhost:8080/users/login", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(data)
+        });
 
-    const result = await response.json();
+        const result = await response.json();
 
-    console.log("LOGIN RESPONSE:", result);
+        // FIX: Check if the response was successful (status 200-299)
+        if (response.ok) {
+            console.log("LOGIN SUCCESS:", result);
 
-    localStorage.setItem("userId", result.userId || result.id);
+            // Store the ID correctly depending on how your backend sends it
+            localStorage.setItem("userId", result.userId || result.id);
+            localStorage.setItem("loginTime", Date.now());
 
-
-     localStorage.setItem("loginTime", Date.now());
-
-    alert("Login successful");
-    window.location.href = "index.html";
+            alert("Login successful");
+            window.location.href = "index.html";
+        } else {
+            // FIX: If the backend sent an error (like 400), show the error message
+            console.error("LOGIN FAILED:", result);
+            alert("Login failed: " + (result.error || "Invalid credentials"));
+        }
+    } catch (error) {
+        console.error("NETWORK ERROR:", error);
+        alert("An error occurred. Please check if the backend server is running.");
+    }
 }

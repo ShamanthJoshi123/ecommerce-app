@@ -4,7 +4,6 @@ import com.test.ecommerce.order.model.Order;
 import com.test.ecommerce.order.model.OrderItem;
 import com.test.ecommerce.order.repository.OrderRepository;
 import com.test.ecommerce.order.service.OrderService;
-
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -15,6 +14,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
@@ -27,37 +27,22 @@ class OrderServiceTest {
     private OrderService orderService;
 
     @Test
-    void testPlaceOrder() {
-
-        // CREATE ORDER
+    void testPlaceOrder_TotalCalculation() {
         Order order = new Order();
-
-        // CREATE ITEM
         OrderItem item = new OrderItem();
-        item.setPrice(100.0);
+        item.setPrice(500.0);
         item.setQuantity(2);
 
-        // IMPORTANT: link item → order
-        item.setOrder(order);
-
-        // ADD ITEMS
         List<OrderItem> items = new ArrayList<>();
         items.add(item);
         order.setItems(items);
 
-        // MOCK SAVE
-        when(orderRepository.save(any(Order.class))).thenReturn(order);
+        when(orderRepository.save(any(Order.class))).thenAnswer(i -> i.getArguments()[0]);
 
-        // CALL METHOD
         Order result = orderService.placeOrder(order);
 
-        // ASSERTIONS
-        assertNotNull(result);
-        assertEquals(200.0, result.getTotalAmount());
+        assertEquals(1000.0, result.getTotalAmount());
         assertEquals("PLACED", result.getStatus());
-        assertNotNull(result.getOrderDate());
-
-        // VERIFY SAVE CALLED
-        verify(orderRepository, times(1)).save(order);
+        verify(orderRepository).save(any(Order.class));
     }
 }

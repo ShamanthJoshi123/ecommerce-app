@@ -112,3 +112,36 @@ button {
     border: none;
     cursor: pointer;
 }
+
+.order-card {
+    background: var(--white);
+    margin: 2rem 10%;
+    padding: 2rem;
+    border-radius: 16px;
+    box-shadow: var(--shadow);
+}
+
+.order-header {
+    display: flex;
+    justify-content: space-between;
+    padding-bottom: 1.5rem;
+    border-bottom: 2px solid #f8fafc;
+}
+
+.order-item {
+    display: flex;
+    margin-top: 1.5rem;
+    padding: 1rem;
+    background: #f8fafc;
+    border-radius: 12px;
+    align-items: center;
+}
+
+.order-item img {
+    width: 80px;
+    height: 80px;
+    object-fit: contain;
+    margin-right: 1.5rem;
+}
+
+.status-paid { color: #10b981; font-weight: 700; } /* Emerald Green */

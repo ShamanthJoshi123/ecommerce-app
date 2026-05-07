@@ -97,3 +97,47 @@ button {
     border: none;
     cursor: pointer;
 }
+
+.container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    padding: 4rem 10%;
+    align-items: center;
+}
+
+.product-img {
+    width: 100%;
+    max-height: 500px;
+    object-fit: contain;
+    background: white;
+    border-radius: 20px;
+    padding: 2rem;
+    box-shadow: var(--shadow);
+}
+
+.details h2 { font-size: 2.5rem; font-weight: 800; color: var(--dark); }
+
+#price {
+    font-size: 1.8rem;
+    color: var(--primary);
+    font-weight: 700;
+    margin: 1rem 0;
+}
+
+#desc { color: var(--text-muted); font-size: 1.1rem; margin-bottom: 2rem; }
+
+button {
+    width: 100%;
+    padding: 16px;
+    background: orange;
+    color: white;
+    border-radius: 12px;
+    font-weight: 700;
+    font-size: 1.1rem;
+    border: none;
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+button:hover { background: yellow; box-shadow: 0 10px 15px -3px rgba(37, 99, 235, 0.4); }

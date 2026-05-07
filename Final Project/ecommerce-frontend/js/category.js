@@ -1,25 +1,24 @@
-
 function getCategoryFromURL() {
-
     const params = new URLSearchParams(window.location.search);
-
     return decodeURIComponent(params.get("type"));
 }
 
 const rupee = "\u20B9";
 
+// NEW: Helper function to navigate to details (consistent with product.js)
+function viewProduct(id) {
+    localStorage.setItem("productId", id);
+    window.location.href = "product-detail.html";
+}
+
 async function loadCategoryProducts() {
-
     const category = getCategoryFromURL();
-
     if (!category) return;
 
     document.getElementById("categoryTitle").innerText = category;
 
     try {
-
         const response = await fetch("http://localhost:8080/products");
-
         const products = await response.json();
 
         // FILTER PRODUCTS
@@ -28,26 +27,20 @@ async function loadCategoryProducts() {
         );
 
         let html = "";
-
         if (filtered.length === 0) {
             html = "<h3>No products found</h3>";
         }
 
         filtered.forEach(p => {
-
+            // UPDATED: Added onclick to the div and stopPropagation to the button
             html += `
-                <div class="product-card">
-
+                <div class="product-card" onclick="viewProduct(${p.id})">
                     <img src="${p.imageUrl}" class="product-img">
-
                     <h3>${p.name}</h3>
-
                     <p>${rupee}${p.price}</p>
-
-                    <button onclick="addToCart(${p.id})">
+                    <button onclick="event.stopPropagation(); addToCart(${p.id})">
                         Add to Cart
                     </button>
-
                 </div>
             `;
         });
@@ -60,32 +53,24 @@ async function loadCategoryProducts() {
 }
 
 async function updateCartCountFromBackend() {
-
     const userId = localStorage.getItem("userId");
-
     if (!userId) return;
 
     const response = await fetch(`http://localhost:8080/cart/${userId}`);
-
     const data = await response.json();
-
     const items = data.data?.items || [];
 
     let count = 0;
-
     items.forEach(item => {
         count += item.quantity;
     });
 
     const el = document.getElementById("cartCount");
-
     if (el) el.innerText = count;
 }
 
 async function addToCart(productId) {
-
     const userId = localStorage.getItem("userId");
-
     if (!userId) {
         alert("Please login first");
         window.location.href = "login.html";
@@ -98,15 +83,11 @@ async function addToCart(productId) {
     );
 
     updateCartCountFromBackend();
-
     alert("Added to cart");
 }
 
 window.onload = function () {
-
     if (!checkSession()) return;
-
     updateCartCountFromBackend();
-
     loadCategoryProducts();
 };
