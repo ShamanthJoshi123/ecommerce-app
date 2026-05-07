@@ -15,6 +15,7 @@ public class Product {
     private double price;
     private int quantity;
     private String category;
+    private String imageUrl;
 
 
     public Product() {
@@ -79,5 +80,13 @@ public class Product {
 
     public void setCategory(String category) {
         this.category = category;
+    }
+
+    public String getImageUrl() {
+        return imageUrl;
+    }
+
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
     }
 }

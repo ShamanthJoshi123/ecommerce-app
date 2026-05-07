@@ -13,6 +13,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.Optional;
 
 @Service
 public class CartServiceImpl implements CartService {
@@ -36,51 +38,57 @@ public class CartServiceImpl implements CartService {
     @Override
     public Cart addToCart(Long userId, Long productId, int quantity) {
 
-
-        User user = userRepository.findById(userId)
-                .orElseThrow(() -> new RuntimeException("User not found"));
-
-
-       if (!userService.isUserLoggedIn(userId)) {
-            throw new RuntimeException("User not logged in");
-       }
-
-        // Check product
         Product product = productRepository.findById(productId)
                 .orElseThrow(() -> new RuntimeException("Product not found"));
 
-        // Check quantity
-        if (product.getQuantity() < quantity) {
-            throw new RuntimeException("Not enough stock");
-        }
-
-        // Get or create cart
         Cart cart = cartRepository.findByUserId(userId)
                 .orElseGet(() -> {
                     Cart newCart = new Cart();
                     newCart.setUserId(userId);
                     newCart.setItems(new ArrayList<>());
-                    return newCart;
+                    return cartRepository.save(newCart);
                 });
 
-        // Ensure list not null
         if (cart.getItems() == null) {
             cart.setItems(new ArrayList<>());
         }
 
-        // Create item
-        CartItem item = new CartItem();
-        item.setProductId(productId);
-        item.setQuantity(quantity);
-       //item.setPrice(product.getPrice());
-        item.setCart(cart);
+        if (quantity > 0 && product.getQuantity() < quantity) {
+            throw new RuntimeException("Not enough stock");
+        }
 
-        cart.getItems().add(item);
+        Optional<CartItem> existing = cart.getItems().stream()
+                .filter(i -> i.getProductId().equals(productId))
+                .findFirst();
 
-        cartRepository.save(cart);
-        cartItemRepository.save(item);
+        if (existing.isPresent()) {
 
-        return cart;
+            CartItem item = existing.get();
+
+            int newQty = item.getQuantity() + quantity;
+
+            if (newQty <= 0) {
+                cart.getItems().remove(item);
+                cartItemRepository.delete(item);
+            } else {
+                item.setQuantity(newQty);
+                cartItemRepository.save(item);
+            }
+
+        } else {
+
+            if (quantity > 0) {
+                CartItem item = new CartItem();
+                item.setProductId(productId);
+                item.setQuantity(quantity);
+                item.setCart(cart);
+
+                cart.getItems().add(item);
+                cartItemRepository.save(item);
+            }
+        }
+
+        return cartRepository.save(cart);
     }
 
 
@@ -98,11 +106,21 @@ public class CartServiceImpl implements CartService {
                 .orElseThrow(() -> new RuntimeException("Cart not found"));
 
         if (cart.getItems() != null) {
-            cart.getItems().removeIf(item ->
-                    item.getProductId().equals(productId));
+
+            Iterator<CartItem> iterator = cart.getItems().iterator();
+
+            while (iterator.hasNext()) {
+                CartItem item = iterator.next();
+
+                if (item.getProductId().equals(productId)) {
+                    iterator.remove(); // remove from cart list
+                    cartItemRepository.delete(item);
+                }
+            }
         }
 
         return cartRepository.save(cart);
+
     }
 
 
@@ -124,4 +142,6 @@ public class CartServiceImpl implements CartService {
 
         return cartRepository.save(cart);
     }
+
+
 }

@@ -1,0 +1,141 @@
+body {
+    margin: 0;
+    font-family: Arial;
+    background: #eaeded;
+}
+
+/* ===============================
+   NAVBAR
+=============================== */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #0f172a;   /* dark modern blue */
+    padding: 12px 25px;
+    color: white;
+}
+
+/* LOGO */
+.logo-link h2 {
+    color: #ffffff;
+    font-size: 22px;
+    font-weight: bold;
+}
+
+/* NAV ICON CONTAINER */
+.navbar div {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+/* ICON LINKS */
+.navbar a {
+    color: white;
+    font-size: 20px;
+    text-decoration: none;
+    padding: 8px;
+    border-radius: 8px;
+    transition: 0.2s;
+}
+
+/* ICON HOVER */
+.navbar a:hover {
+    background-color: #1e293b;
+    transform: scale(1.1);
+}
+
+/* CART COUNT */
+.cart-icon {
+    position: relative;
+}
+
+#cartCount {
+    position: absolute;
+    top: -6px;
+    right: -10px;
+    background: red;
+    color: white;
+    font-size: 12px;
+    padding: 2px 6px;
+    border-radius: 50%;
+}
+
+/* LOGIN / LOGOUT BUTTON */
+#loginBtn, #logoutBtn {
+    background-color: #2563eb;
+    color: white;
+    border: none;
+    padding: 6px 12px;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+#loginBtn:hover, #logoutBtn:hover {
+    background-color: #1d4ed8;
+}
+.logo-link {
+    text-decoration: none;
+    color: inherit;
+    cursor: pointer;
+}
+
+.container {
+    display: flex;
+    gap: 20px;
+    padding: 20px;
+}
+
+.left {
+    flex: 2;
+}
+
+.right {
+    flex: 1;
+}
+
+.card {
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+}
+
+.summary {
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+    position: sticky;
+    top: 20px;
+}
+
+.secure {
+    color: gray;
+    font-size: 14px;
+}
+
+.note {
+    font-size: 12px;
+    color: gray;
+}
+
+.pay-btn {
+    width: 100%;
+    padding: 12px;
+    background: #ffd814;
+    border: none;
+    margin-top: 20px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.pay-btn:hover {
+    background: #f7ca00;
+}
+button {
+    background: orange;
+    padding: 10px;
+    border: none;
+    cursor: pointer;
+}

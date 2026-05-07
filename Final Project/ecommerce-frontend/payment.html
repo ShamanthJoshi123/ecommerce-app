@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Payment</title>
+
+    <link rel="stylesheet" href="css/payment.css">
+    <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+</head>
+
+<body>
+
+<header class="navbar">
+    <a href="index.html" class="logo-link">
+        <h2>ShopEasy</h2>
+    </a>
+</header>
+
+<div class="container">
+
+    <!-- LEFT -->
+    <div class="left">
+
+        <div class="card">
+            <h3>Select Payment Method</h3>
+
+            <p class="secure">Secure payment powered by Razorpay</p>
+
+            <button class="pay-btn" onclick="startPayment()">
+                Pay Now
+            </button>
+        </div>
+
+    </div>
+
+    <!-- RIGHT -->
+    <div class="right">
+
+        <div class="summary">
+            <h3>Order Summary</h3>
+
+            <p>Total Amount</p>
+            <h2><span id="amount">0</span></h2>
+
+            <p class="note">All taxes included</p>
+        </div>
+
+    </div>
+
+</div>
+
+<script src="js/common.js"></script>
+
+<script src="js/payment.js"></script>
+
+</body>
+</html>

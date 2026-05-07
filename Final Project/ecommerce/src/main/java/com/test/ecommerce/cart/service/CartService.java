@@ -11,4 +11,6 @@ public interface CartService {
     Cart removeFromCart(Long userId, Long productId);
 
     Cart updateCartItem(Long userId, Long productId, int quantity);
+
+
 }

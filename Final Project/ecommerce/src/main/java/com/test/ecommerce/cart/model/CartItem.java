@@ -1,6 +1,7 @@
 package com.test.ecommerce.cart.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.test.ecommerce.product.model.Product;
 
 import javax.persistence.*;
 
@@ -10,8 +11,12 @@ public class CartItem {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
+     @Column(name = "product_id")
     private Long productId;
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "product_id", insertable = false, updatable = false)
+    private Product product;
+
     private int quantity;
 
     @ManyToOne
@@ -50,5 +55,9 @@ public class CartItem {
 
     public void setCart(Cart cart) {
         this.cart = cart;
+    }
+
+    public Product getProduct() {
+        return product;
     }
 }

@@ -24,7 +24,7 @@ public class User {
     private String email;
 
     @NotBlank(message = "Password is required")
-   // @JsonIgnore // 🔐 hide in response
+
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private String password;
 
@@ -36,7 +36,6 @@ public class User {
 
     private String address;
 
-    // getters & setters
     public Long getId() { return id; }
     public void setId(Long id) { this.id = id; }
 

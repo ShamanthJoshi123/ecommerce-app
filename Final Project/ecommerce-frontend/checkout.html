@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Checkout</title>
+    <link rel="stylesheet" href="css/checkout.css">
+
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+
+<body>
+
+<!-- NAVBAR -->
+<header class="navbar">
+    <a href="index.html" class="logo-link">
+        <h2>ShopEasy</h2>
+    </a>
+</header>
+
+<div class="checkout-container">
+
+    <!-- LEFT SIDE -->
+    <div class="left">
+
+        <!-- ADDRESS -->
+        <div class="card">
+            <h3>Delivery Address</h3>
+
+            <input id="name" placeholder="Full Name">
+            <input id="phone" placeholder="Phone Number">
+            <input id="address" placeholder="Address">
+            <input id="city" placeholder="City">
+        </div>
+
+        <!-- PAYMENT -->
+        <div class="card">
+            <h3>Payment Method</h3>
+
+            <label><input type="radio" name="payment" checked> Cash on Delivery</label>
+            <label><input type="radio" name="payment"> UPI</label>
+            <label><input type="radio" name="payment"> Card</label>
+        </div>
+
+    </div>
+
+    <!-- RIGHT SIDE (SUMMARY) -->
+    <div class="right">
+
+        <div class="summary-card">
+            <h3>Order Summary</h3>
+
+            <p>Items: <span id="itemsTotal">0</span></p>
+            <p>Delivery: <span class="free">FREE</span></p>
+            <p>Discount: <span id="discount">0</span></p>
+
+            <hr>
+
+            <h2>Total: <span id="total">0</span></h2>
+
+            <button onclick="goToPayment()" class="place-btn">
+                Proceed to Payment
+            </button>
+        </div>
+
+    </div>
+
+</div>
+<script src="js/common.js"></script>
+<script src="js/checkout.js"></script>
+
+</body>
+</html>

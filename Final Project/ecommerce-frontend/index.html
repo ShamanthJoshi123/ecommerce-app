@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>ShopEasy</title>
+
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<script>
+    function goToCategory(category) {
+
+        const encoded = encodeURIComponent(category);
+
+        window.location.href = "category.html?type=" + encoded;
+    }
+</script>
+<body>
+
+
+<<header class="navbar">
+
+    <a href="index.html" class="logo-link">
+        <h2>ShopEasy</h2>
+    </a>
+
+    <div>
+
+        <a href="index.html" title="Home">
+            <i class="fa fa-home"></i>
+        </a>
+
+        <a href="products.html" title="Products">
+            <i class="fa fa-store"></i>
+        </a>
+
+        <a href="cart.html" class="cart-icon" title="Cart">
+            <i class="fa fa-shopping-cart"></i>
+            <span id="cartCount">0</span>
+        </a>
+
+        <a href="orders.html" title="Orders">
+            <i class="fa fa-box"></i>
+        </a>
+        <button id="loginBtn" onclick="goToLogin()" style="display:none;">
+            Login
+        </button>
+
+        <!-- LOGOUT BUTTON -->
+        <button id="logoutBtn" onclick="logout()" style="display:none;">
+            Logout
+        </button>
+    </div>
+
+</header>
+
+<section class="hero">
+    <div class="hero-content">
+        <h1>Great Deals on Electronics </h1>
+        <p>Up to 40% OFF</p>
+        <a href="products.html" class="btn">Shop Now</a>
+    </div>
+</section>
+
+
+<section class="deals">
+    <h2>Today's Deals</h2>
+
+    <div class="deal-container">
+
+        <div class="deal-card" onclick="goToCategory('Laptops')">
+            <img src="https://images.pexels.com/photos/205421/pexels-photo-205421.jpeg?cs=srgb&dl=pexels-craigmdennis-205421.jpg&fm=jpg">
+            <p>Laptops</p>
+        </div>
+
+        <div class="deal-card" onclick="goToCategory('Mobiles')">
+            <img src="https://tse2.mm.bing.net/th/id/OIP.VTN8_zNTJtKCzT-_0xDrnwHaHZ?w=1000&h=999&rs=1&pid=ImgDetMain&o=7&rm=3">
+            <p>Mobiles</p>
+        </div>
+
+        <div class="deal-card" onclick="goToCategory('Headphones')">
+            <img src="https://tse2.mm.bing.net/th/id/OIP.qMnKupYMJvmaLZEtlxuF6AHaHa?o=7rm=3&rs=1&pid=ImgDetMain&o=7&rm=3">
+            <p>Headphones</p>
+        </div>
+
+        <div class="deal-card" onclick="goToCategory('Smart Watches')">
+            <img src="https://tse2.mm.bing.net/th/id/OIP.bPjE3IvBwrujueTJPYT9zAHaEK?w=303&h=180&c=7&r=0&o=7&pid=1.7&rm=3">
+            <p>Smart Watches</p>
+        </div>
+
+    </div>
+</section>
+<script src="js/common.js"></script>
+<script src="js/product.js"></script>
+
+<script>
+    window.onload = function () {
+        updateCartCountFromBackend();
+    };
+</script>
+</body>
+</html>

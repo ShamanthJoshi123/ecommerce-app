@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Your Orders</title>
+    <link rel="stylesheet" href="css/orders.css">
+
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+
+<body>
+
+<header class="navbar">
+
+    <a href="index.html" class="logo-link">
+        <h2>ShopEasy</h2>
+    </a>
+
+    <div>
+
+        <a href="index.html" title="Home">
+            <i class="fa fa-home"></i>
+        </a>
+
+        <a href="products.html" title="Products">
+            <i class="fa fa-store"></i>
+        </a>
+
+        <a href="cart.html" class="cart-icon" title="Cart">
+            <i class="fa fa-shopping-cart"></i>
+            <span id="cartCount">0</span>
+        </a>
+
+        <a href="orders.html" title="Orders">
+            <i class="fa fa-box"></i>
+        </a>
+        <button id="loginBtn" onclick="goToLogin()" style="display:none;">
+            Login
+        </button>
+
+        <button id="logoutBtn" onclick="logout()" style="display:none;">
+            Logout
+        </button>
+    </div>
+
+</header>
+
+<h2 class="title">Your Orders</h2>
+
+<div id="orders-container"></div>
+
+<script src="js/common.js"></script>
+
+<script src="js/orders.js"></script>
+
+</body>
+</html>

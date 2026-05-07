@@ -62,24 +62,20 @@ public class ProductService {
                 .orElseThrow(() -> new RuntimeException("Product not found"));
     }
 
-    public Product updateProduct(Long userId, Long id, Product updatedProduct) {
 
-        User user = userRepository.findById(userId)
-                .orElseThrow(() -> new RuntimeException("User not found"));
+    public Product updateProduct(Long UserId, Long id, Product product) {
 
-        if (!"ADMIN".equalsIgnoreCase(user.getRole())) {
-            throw new RuntimeException("Only ADMIN can update products");
-        }
+        Product existingProduct = repository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Product not found"));
 
-        Product product = getProductById(id);
+        existingProduct.setName(product.getName());
+        existingProduct.setDescription(product.getDescription());
+        existingProduct.setPrice(product.getPrice());
+        existingProduct.setQuantity(product.getQuantity());
+        existingProduct.setCategory(product.getCategory());
+        existingProduct.setImageUrl(product.getImageUrl());
 
-        product.setName(updatedProduct.getName());
-        product.setDescription(updatedProduct.getDescription());
-        product.setPrice(updatedProduct.getPrice());
-        product.setQuantity(updatedProduct.getQuantity());
-        product.setCategory(updatedProduct.getCategory());
-
-        return repository.save(product);
+        return repository.save(existingProduct);
     }
 
     public void deleteProduct(Long userId, Long id) {

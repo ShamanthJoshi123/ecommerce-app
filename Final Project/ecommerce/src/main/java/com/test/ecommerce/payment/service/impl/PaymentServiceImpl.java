@@ -33,8 +33,8 @@ public class PaymentServiceImpl implements PaymentService {
         if (order.getUserId() == null) {
             throw new RuntimeException("Invalid order: no user linked");
         }
-        if (!"PLACED".equals(order.getStatus())) {
-            throw new RuntimeException("Payment allowed only for PLACED orders");
+        if ("PAID".equals(order.getStatus())) {
+            throw new RuntimeException("Payment already completed");
         }
 
         Payment payment = new Payment();

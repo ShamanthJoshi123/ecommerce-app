@@ -45,14 +45,14 @@ class PaymentServiceTest {
 
         Long orderId = 1L;
 
-        // ✅ CREATE ORDER
+
         Order order = new Order();
         order.setOrderId(orderId);
         order.setUserId(1L);
         order.setStatus("PLACED");
         order.setTotalAmount(200.0);
 
-        // ✅ CREATE ORDER ITEM
+
         OrderItem item = new OrderItem();
         item.setProductId(10L);
         item.setQuantity(2);
@@ -61,12 +61,12 @@ class PaymentServiceTest {
         items.add(item);
         order.setItems(items);
 
-        // ✅ CREATE PRODUCT
+
         Product product = new Product();
         product.setId(10L);
         product.setQuantity(10);
 
-        // ✅ MOCKS
+
         when(orderRepository.findById(orderId))
                 .thenReturn(Optional.of(order));
 
@@ -82,15 +82,15 @@ class PaymentServiceTest {
         when(paymentRepository.save(any(Payment.class)))
                 .thenAnswer(i -> i.getArgument(0));
 
-        // 🔥 CALL
+
         Payment result = paymentService.processPayment(orderId, "UPI");
 
-        // ✅ ASSERT
+
         assertNotNull(result);
         assertEquals("SUCCESS", result.getStatus());
         assertEquals(200.0, result.getAmount());
 
-        // ✅ VERIFY STOCK UPDATED
+
         assertEquals(8, product.getQuantity()); // 10 - 2
     }
 }

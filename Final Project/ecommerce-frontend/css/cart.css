@@ -1,0 +1,168 @@
+body {
+    margin: 0;
+    font-family: Arial;
+    background: #eaeded;
+}
+
+
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #0f172a;   /* dark modern blue */
+    padding: 12px 25px;
+    color: white;
+}
+
+/* LOGO */
+.logo-link h2 {
+    color: #ffffff;
+    font-size: 22px;
+    font-weight: bold;
+}
+
+/* NAV ICON CONTAINER */
+.navbar div {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+/* ICON LINKS */
+.navbar a {
+    color: white;
+    font-size: 20px;
+    text-decoration: none;
+    padding: 8px;
+    border-radius: 8px;
+    transition: 0.2s;
+}
+
+/* ICON HOVER */
+.navbar a:hover {
+    background-color: #1e293b;
+    transform: scale(1.1);
+}
+
+/* CART COUNT */
+.cart-icon {
+    position: relative;
+}
+
+#cartCount {
+    position: absolute;
+    top: -6px;
+    right: -10px;
+    background: red;
+    color: white;
+    font-size: 12px;
+    padding: 2px 6px;
+    border-radius: 50%;
+}
+
+/* LOGIN / LOGOUT BUTTON */
+#loginBtn, #logoutBtn {
+    background-color: #2563eb;
+    color: white;
+    border: none;
+    padding: 6px 12px;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+#loginBtn:hover, #logoutBtn:hover {
+    background-color: #1d4ed8;
+}
+.logo-link {
+    text-decoration: none;
+    color: inherit;
+    cursor: pointer;
+}
+/* LAYOUT */
+.cart-container {
+    display: flex;
+    padding: 20px;
+    gap: 20px;
+}
+
+/* LEFT */
+#cart-items {
+    flex: 3;
+}
+
+/* ITEM CARD */
+.cart-item {
+    display: flex;
+    background: white;
+    padding: 15px;
+    margin-bottom: 15px;
+    border-radius: 8px;
+}
+
+/* IMAGE */
+.cart-item img {
+    width: 150px;
+    height: 150px;
+    object-fit: cover;
+    margin-right: 20px;
+}
+
+/* DETAILS */
+.cart-details {
+    flex: 1;
+}
+
+/* QTY BUTTON */
+.qty-btn {
+    padding: 5px 10px;
+    margin: 5px;
+    background: #ffd814;
+    border: none;
+    cursor: pointer;
+}
+
+/* SUMMARY */
+.summary {
+    flex: 1;
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+}
+
+.summary button {
+    width: 100%;
+    padding: 10px;
+    background: #ffd814;
+    border: none;
+    cursor: pointer;
+}
+
+.remove-btn {
+    margin-top: 10px;
+    background: red;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
+}
+
+.summary p {
+    display: flex;
+    justify-content: space-between;
+}
+
+.checkout-btn {
+    margin-top: 15px;
+    background: #ffa41c;
+    border: none;
+    padding: 10px;
+    width: 100%;
+    cursor: pointer;
+}
+button {
+    background: orange;
+    padding: 10px;
+    border: none;
+    cursor: pointer;
+}

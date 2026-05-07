@@ -1,5 +1,6 @@
 package com.test.ecommerce.order.model;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.test.ecommerce.product.model.Product;
 
 import javax.persistence.*;
 
@@ -11,11 +12,18 @@ public class OrderItem {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(name = "product_id")
     private Long productId;
+
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "product_id", insertable = false, updatable = false)
+    private Product product;
 
     private int quantity;
 
     private Double price;
+
+
 
     @ManyToOne
     @JoinColumn(name = "order_id")
@@ -60,5 +68,13 @@ public class OrderItem {
 
     public void setOrder(Order order) {
         this.order = order;
+    }
+
+    public Product getProduct() {
+        return product;
+    }
+
+    public void setProduct(Product product) {
+        this.product = product;
     }
 }
